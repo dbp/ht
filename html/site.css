@@ -1,0 +1,24 @@
+* {
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
+.row-no-padding [class*="col-"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.navigation a:hover, .navigation a.selected {
+  background-color: #eee;
+}
+.navigation a {
+  color: #000;
+}
+.navigation {
+  border-bottom: 1px solid #eee;
+}
+
+
+.CodeMirror {
+  border: 1px solid #eee;
+  height: auto;
+}
