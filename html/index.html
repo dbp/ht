@@ -14,20 +14,32 @@
   </head>
 
   <style type="text/css">
-    .navigation a:hover, .navigation a.active {
+    * {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+    }
+    .row-no-padding [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    }
+    .navigation a:hover, .navigation a.selected {
     background-color: #eee;
     }
     .navigation a {
     color: #000;
+    }
+    .navigation {
+    border-bottom: 1px solid #eee;
     }
   </style>
 
   <body>
     <div class="container-fluid">
 
-      <div class="row navigation" style="border-bottom: 1px solid #eee;">
+      <div class="row row-no-padding navigation">
         <div class="col-xs-3">
-          <a href="index.html" class="btn btn-block"><span class="glyphicon glyphicon-header"></span></a>
+          <a href="index.html" class="selected btn btn-block"><span class="glyphicon glyphicon-header"></span></a>
         </div>
         <div class="col-xs-3">
           <a href="index.html" class="btn btn-block"><span class="glyphicon glyphicon-th-list"></span></a>
