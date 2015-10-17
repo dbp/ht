@@ -1,8 +1,15 @@
-var picker = new Pikaday({ field: document.getElementById('date'),
-                           defaultDate: new Date(),
-                           setDefaultDate: true,
-                           format: "YYYY/MM/DD"
-                         });
+$(function () {
+
+
+  $(".date").each(function (_, e) {
+    new Pikaday({ field: e,
+                  defaultDate: new Date(),
+                  setDefaultDate: true,
+                  format: "YYYY/MM/DD"
+                });
+  });
+});
+
 
 
 var substringDefaultMatcher = function(strs, def) {

@@ -22,3 +22,7 @@
   border: 1px solid #eee;
   height: auto;
 }
+
+.form-padded {
+  padding: 10px;
+}

@@ -1,0 +1,91 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta name="viewport" content="width=350px, user-scalable=no">
+    <title>HouseTab</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="pikaday.css"/>
+    <link rel="stylesheet" href="site.css"/>
+    <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bootstrap3-typeahead.min.js"></script>
+    <script type="text/javascript" src="moment.min.js"></script>
+    <script type="text/javascript" src="pikaday.js"></script>
+    <script type="text/javascript" src="site.js"></script>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+
+      <div class="row row-no-padding navigation">
+        <div class="col-xs-3">
+          <a href="index.html" class="btn btn-block"><span class="glyphicon glyphicon-header"></span></a>
+        </div>
+        <div class="col-xs-3">
+          <a href="balances.html" class="selected btn btn-block"><span class="glyphicon glyphicon-th-list"></span></a>
+        </div>
+        <div class="col-xs-3">
+          <a href="ledger.html" class="btn btn-block"><span class="glyphicon glyphicon-console"></span></a>
+        </div>
+        <div class="col-xs-3">
+          <a href="settings.html" class="btn btn-block"><span class="glyphicon glyphicon-cog"></span></a>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12">
+          <form class="form-inline form-padded">
+            <div class="form-group">
+              <select name="mode" class="form-control">
+                <option selected="selected" value="bal">bal</option>
+                <option value="reg">reg</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="filter" value="expenses">
+            </div>
+            <div class="form-group">
+              <input type="text" name="start_date" class="form-control date">
+            </div>
+            to
+            <div class="form-group">
+              <input type="text" name="end_date" class="form-control date">
+            </div>
+            <button type="submit" class="btn btn-default">Go</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <table class="table table-condensed table-bordered table-striped">
+            <tr><td> $1674.08</td><td>expenses:business:services</td></tr>
+            <tr><td> $1674.25</td><td>expenses:personal:cash</td></tr>
+            <tr><td> $1815.71</td><td>expenses:personal:clothing</td></tr>
+            <tr><td>  $567.69</td><td>expenses:personal:discretionary</td></tr>
+            <tr><td>   $58.00</td><td>expenses:personal:donations</td></tr>
+            <tr><td>  $787.81</td><td>expenses:personal:gifts</td></tr>
+            <tr><td> $3991.42</td><td>expenses:personal:groceries</td></tr>
+            <tr><td> $1686.44</td><td>expenses:personal:healthcare</td></tr>
+            <tr><td>  $231.64</td><td>expenses:personal:household</td></tr>
+            <tr><td>  $343.91</td><td>expenses:personal:misc</td></tr>
+            <tr><td>  $448.81</td><td>expenses:personal:pet</td></tr>
+            <tr><td> $8600.00</td><td>expenses:personal:rent</td></tr>
+            <tr><td> $1495.55</td><td>expenses:personal:restaurants</td></tr>
+            <tr><td>  $166.11</td><td>expenses:personal:utilities</td></tr>
+            <tr><td> $1380.08</td><td>expenses:personal:utilities:phone</td></tr>
+            <tr><td>  $461.00</td><td>expenses:personal:vacation</td></tr>
+            <tr><td>$21240.00</td><td>expenses:taxes:federal</td></tr>
+            <tr><td> $7426.00</td><td>expenses:taxes:ny</td></tr>
+            <tr><td>  $217.84</td><td>expenses:taxes:services</td></tr>
+            <tr><td>  $473.92</td><td>expenses:transit</td></tr>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>
