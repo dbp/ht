@@ -8,8 +8,6 @@ $(function () {
                   format: "YYYY/MM/DD"
                 });
   });
-});
-
 
 
 var substringDefaultMatcher = function(strs, def) {
@@ -98,3 +96,5 @@ typeahead("#to",
            "expenses:transit"],
           ["housetab:amy,daniel:groceries",
            "expenses:personal:misc"]);
+
+});
