@@ -3,8 +3,6 @@ $(function () {
 
   $(".date").each(function (_, e) {
     new Pikaday({ field: e,
-                  defaultDate: new Date(),
-                  setDefaultDate: true,
                   format: "YYYY/MM/DD"
                 });
   });

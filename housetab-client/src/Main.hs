@@ -68,11 +68,30 @@ initializer = do h <- heistInit ["templates"] splices
                    Right hs ->
                      return (Ctxt defaultRequest hs)
 
+paramMaybe :: FromParam p =>
+              Text ->
+              Req ->
+              (Maybe p -> a) ->
+              Maybe (Req, a)
+paramMaybe n req k =
+  let (_,q,_) = req
+      match = filter ((== T.encodeUtf8 n) . fst) q
+  in case foldLefts [] $ map (fromParam . maybe "" T.decodeUtf8 . snd) match of
+       Right [p] -> Just (req, k (Just p))
+       _ -> Just (req, k Nothing)
+  where foldLefts acc [] = Right (reverse acc)
+        foldLefts _ (Left x : _) = Left x
+        foldLefts acc (Right x : xs) = foldLefts (x : acc) xs
+
 site :: Ctxt -> IO Response
 site ctxt =
   route ctxt [ end // method GET          ==> indexHandler
              , segment // path "add"      ==> addHandler
-             , segment // path "reg"      ==> regHandler
+             , segment // path "reg" /? paramMaybe "mode"
+                                     /? paramMaybe "start_date"
+                                     /? paramMaybe "end_date"
+                                     /? paramMaybe "filter"
+                                          ==> regHandler
              , segment // path "src"      ==> srcHandler
              , segment // path "settings" ==> settingsHandler
              , path "static"              ==> staticServe "static"
@@ -104,23 +123,64 @@ addHandler uuid ctxt =
   where getHandler ctxt = render ctxt "add"
         postHandler ctxt = undefined
 
-regHandler :: UUID -> Ctxt -> IO (Maybe Response)
-regHandler uuid ctxt =
-  do src <- runLedgerCommand uuid Reg ["expenses", "date:2015"]
-     case C.decodeByName (TL.encodeUtf8 (TL.fromStrict src)) of
-       Left err -> log' (T.pack err) >> render ctxt "reg"
-       Right (_, vec) ->
-         renderWithSplices
-           ctxt "reg"
-           ("entries" ## mapSplices
-                           (\RegResult{..} ->
-                              runChildrenWithText
-                                (do "date" ## regDate
-                                    "desc" ## regDesc
-                                    "account" ## regAccount
-                                    "amount" ## regAmount
-                                    "balance" ## regBalance))
-                           (V.toList vec))
+
+regHandler :: UUID ->
+              Maybe Text ->
+              Maybe Text ->
+              Maybe Text ->
+              Maybe Text ->
+              Ctxt ->
+              IO (Maybe Response)
+regHandler uuid mode' start' end' filter' ctxt =
+  do let mode = fromMaybe "reg" mode'
+         start = fromMaybe "1/1" start'
+         end = fromMaybe "next year" end'
+         filter = fromMaybe "expenses" filter'
+         date = "date:\"" <> start <> " " <> end <> "\""
+     case mode of
+       "reg" -> do src <- runLedgerCommand uuid Reg
+                               [ filter
+                               , date
+                               ]
+                   case C.decodeByName (TL.encodeUtf8 (TL.fromStrict src)) of
+                     Left err -> log' (T.pack err) >> render ctxt "reg"
+                     Right (_, vec) ->
+                       renderWithSplices
+                         ctxt "reg"
+                         (do "mode" ## textSplice mode
+                             "filter" ## textSplice filter
+                             "start_date" ## textSplice start
+                             "end_date" ## textSplice end
+                             "entries" ## mapSplices
+                                        (\RegResult{..} ->
+                                           runChildrenWithText
+                                             (do "date" ## regDate
+                                                 "desc" ## regDesc
+                                                 "account" ## regAccount
+                                                 "amount" ## regAmount
+                                                 "balance" ## regBalance))
+                                        (V.toList vec))
+       "bal" -> do src <- runLedgerCommand uuid Bal
+                               [ filter
+                               , date
+                               ]
+                   case C.decodeByName (TL.encodeUtf8 (TL.fromStrict src)) of
+                     Left err -> log' (T.pack err) >> render ctxt "bal"
+                     Right (_, vec) ->
+                       renderWithSplices
+                         ctxt "bal"
+                         (do "mode" ## textSplice mode
+                             "filter" ## textSplice filter
+                             "start_date" ## textSplice start
+                             "end_date" ## textSplice end
+                             "entries" ## mapSplices
+                                        (\BalResult{..} ->
+                                           runChildrenWithText
+                                             (do "account" ## balAccount
+
+                                                 "balance" ## balBalance
+                                                 ))
+                                        (V.toList vec))
 
 srcHandler :: UUID -> Ctxt -> IO (Maybe Response)
 srcHandler uuid ctxt =

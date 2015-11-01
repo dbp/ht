@@ -51,3 +51,4 @@ runLedgerCommand uuid command options =
   case command of
     Print -> T.pack <$> readCreateProcess (shell ("hledger print " <> T.unpack (T.intercalate " " options))) ""
     Reg -> T.pack <$> readCreateProcess (shell ("hledger reg --output-format csv " <> T.unpack (T.intercalate " " options))) ""
+    Bal -> T.pack <$> readCreateProcess (shell ("hledger bal --output-format csv " <> T.unpack (T.intercalate " " options))) ""

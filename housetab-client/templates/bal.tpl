@@ -5,8 +5,8 @@
       <form class="form-inline form-padded">
         <div class="form-group">
           <select name="mode" class="form-control">
-            <option value="bal">bal</option>
-            <option selected="selected" value="reg">reg</option>
+            <option selected="selected" value="bal">bal</option>
+            <option value="reg">reg</option>
           </select>
         </div>
         <div class="form-group">
@@ -29,11 +29,8 @@
       <table class="table table-condensed table-bordered table-striped">
         <entries>
           <tr>
-            <td><date/></td>
-            <td><desc/></td>
-            <td><account/></td>
-            <td><amount/></td>
             <td><balance/></td>
+            <td><account/></td>
           </tr>
         </entries>
       </table>
