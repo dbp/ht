@@ -1,0 +1,65 @@
+<apply template="base">
+
+  <div class="row">
+    <div class="col-xs-12">
+      <form class="form-inline form-padded">
+        <div class="form-group">
+          <select name="mode" class="form-control">
+            <option value="bal">bal</option>
+            <option selected="selected" value="reg">reg</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="filter" value="expenses:groceries">
+        </div>
+        <div class="form-group">
+          <input type="text" name="start_date" class="form-control date">
+        </div>
+        to
+        <div class="form-group">
+          <input type="text" name="end_date" class="form-control date">
+        </div>
+        <button type="submit" class="btn btn-default">Go</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table table-condensed table-bordered table-striped">
+        <tr><td>2014/01/03</td><td>Pine Tree</td><td>expenses:groceries</td><td>18.46</td><td>18.46</td></tr>
+        <tr><td>2014/01/06</td><td>Bob and Betty's</td><td>expenses:groceries</td><td>24.94</td><td>43.40</td></tr>
+        <tr><td>2014/01/08</td><td>Pine Tree</td><td>expenses:groceries</td><td>25.23</td><td>68.63</td></tr>
+        <tr><td>2014/01/09</td><td>Bob and Betty's</td><td>expenses:groceries</td><td>36.38</td><td>105.01</td></tr>
+        <tr><td>2014/01/13</td><td>Bob and Betty's</td><td>expenses:groceries</td><td>14.47</td><td>119.48</td></tr>
+        <tr><td>2014/01/15</td><td>Bob and Betty's</td><td>expenses:groceries</td><td>22.45</td><td>141.93</td></tr>
+        <tr><td>2014/01/15</td><td>Costco - groceries</td><td>expenses:groceries</td><td>107.03</td><td>248.96</td></tr>
+        <tr><td>2014/01/16</td><td>Bob and Betty's</td><td>expenses:groceries</td><td>26.95</td><td>275.91</td></tr>
+        <tr><td>2014/01/16</td><td>Whole Foods</td><td>expenses:groceries</td><td>5.52</td><td>281.43</td></tr>
+        <tr><td>2014/01/20</td><td>Bob and Betty's</td><td>expenses:groceries</td><td>14.47</td><td>295.90</td></tr>
+        <tr><td>2014/01/20</td><td>Flour and cake mix</td><td>expenses:groceries</td><td>41.19</td><td>337.09</td></tr>
+        <tr><td>2014/01/24</td><td>Bob and Betty's</td><td>expenses:groceries</td><td>22.95</td><td>360.04</td></tr>
+        <tr><td>2014/01/26</td><td>Bob and Betty's</td><td>expenses:groceries</td><td>40.84</td><td>400.88</td></tr>
+        <tr><td>2014/01/27</td><td>Pine Tree</td><td>expenses:groceries</td><td>31.31</td><td>432.19</td></tr>
+        <tr><td>2014/02/02</td><td>Pine Tree</td><td>expenses:groceries</td><td>36.76</td><td>468.95</td></tr>
+        <tr><td>2014/02/02</td><td>Bob and Betty's</td><td>expenses:groceries</td><td>34.65</td><td>503.60</td></tr>
+        <tr><td>2014/02/05</td><td>Cake mix, potato starch</td><td>expenses:groceries</td><td>29.56</td><td>533.16</td></tr>
+        <tr><td>2014/02/05</td><td>Bob and Betty's</td><td>expenses:groceries</td><td>11.57</td><td>544.73</td></tr>
+        <tr><td>2014/02/06</td><td>Pine Tree</td><td>expenses:groceries</td><td>32.22</td><td>576.95</td></tr>
+        <tr><td>2014/02/08</td><td>Wine</td><td>expenses:groceries</td><td>13.05</td><td>590.00</td></tr>
+        <tr><td>2014/02/08</td><td>Bob and Betty's</td><td>expenses:groceries</td><td>10.87</td><td>600.87</td></tr>
+        <tr><td>2014/02/09</td><td>Bob and Betty's</td><td>expenses:groceries</td><td>28.63</td><td>629.50</td></tr>
+        <tr><td>2014/02/12</td><td>Pine Tree</td><td>expenses:groceries</td><td>17.77</td><td>647.27</td></tr>
+        <tr><td>2014/02/12</td><td>Wine</td><td>expenses:groceries</td><td>13.05</td><td>660.32</td></tr>
+        <tr><td>2014/02/12</td><td>Bob and Betty's</td><td>expenses:groceries</td><td>19.96</td><td>680.28</td></tr>
+        <tr><td>2014/02/14</td><td>Bob and Betty's</td><td>expenses:groceries</td><td>29.73</td><td>710.01</td></tr>
+        <tr><td>2014/02/16</td><td>Tea</td><td>expenses:groceries</td><td>18.24</td><td>728.25</td></tr>
+        <tr><td>2014/02/16</td><td>Pine Tree</td><td>expenses:groceries</td><td>41.73</td><td>769.98</td></tr>
+
+      </table>
+    </div>
+  </div>
+
+
+
+</apply>
