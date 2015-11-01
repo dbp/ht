@@ -70,7 +70,7 @@ handler uuid ctxt =
                       Right xs -> do let vs :: [(Text, [([Text], Int)])]
                                          vs = map fix xs
                                      let result = map (\(name,_) ->  (name, calculate name vs)) vs
-                                     okText (T.pack (show result))
+                                     okText (review _JSON (M.fromList [("balances" :: Text, M.fromList result)]))
   where fix (name, ys) = let keys = ys ^.. values . nth 0 . _String
                              vals = ys ^.. values . nth 1 . _Integral
                          in (T.decodeUtf8 name, zip (map (T.splitOn ",") keys) vals)
