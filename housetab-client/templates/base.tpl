@@ -6,17 +6,18 @@
     <title>HouseTab</title>
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/static/pikaday.css"/>
-    <link rel="stylesheet" href="/static/site.css"/>
+
     <script type="text/javascript" src="/static/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/static/bootstrap3-typeahead.min.js"></script>
     <script type="text/javascript" src="/static/moment.min.js"></script>
     <script type="text/javascript" src="/static/pikaday.js"></script>
-    <script type="text/javascript" src="/static/site.js"> </script>
 
     <link rel="stylesheet" href="/static/codemirror.css">
     <script src="/static/codemirror.js"></script>
 
+    <script type="text/javascript" src="/static/site.js"> </script>
+    <link rel="stylesheet" href="/static/site.css"/>
   </head>
 
   <body>

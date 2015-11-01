@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings   #-}
+{-# LANGUAGE RecordWildCards     #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TemplateHaskell     #-}
 module Main where
@@ -7,13 +8,18 @@ import           Control.Exception         (SomeException (..), catch)
 import           Control.Lens
 import           Control.Logging
 import           Data.Aeson.Lens
+import qualified Data.Csv                  as C
 import           Data.Maybe
 import           Data.Monoid
 import           Data.Text                 (Text)
 import qualified Data.Text                 as T
 import qualified Data.Text.Encoding        as T
+import qualified Data.Text.Lazy            as TL
+import qualified Data.Text.Lazy.Encoding   as TL
 import           Data.UUID
+import qualified Data.Vector               as V
 import           Heist
+import           Heist.Interpreted
 import           Network.HTTP.Types.Method
 import           Network.HTTP.Types.Status
 import           Network.Wai
@@ -23,6 +29,8 @@ import           System.Environment
 import qualified Text.XmlHtml              as X
 import           Web.Fn
 import           Web.Fn.Extra.Heist
+
+import           Ledger
 
 data Ctxt = Ctxt { _req   :: Request
                  , _heist :: FnHeistState Ctxt
@@ -97,10 +105,27 @@ addHandler uuid ctxt =
         postHandler ctxt = undefined
 
 regHandler :: UUID -> Ctxt -> IO (Maybe Response)
-regHandler uuid ctxt = render ctxt "reg"
+regHandler uuid ctxt =
+  do src <- runLedgerCommand uuid Reg ["expenses", "date:2015"]
+     case C.decodeByName (TL.encodeUtf8 (TL.fromStrict src)) of
+       Left err -> log' (T.pack err) >> render ctxt "reg"
+       Right (_, vec) ->
+         renderWithSplices
+           ctxt "reg"
+           ("entries" ## mapSplices
+                           (\RegResult{..} ->
+                              runChildrenWithText
+                                (do "date" ## regDate
+                                    "desc" ## regDesc
+                                    "account" ## regAccount
+                                    "amount" ## regAmount
+                                    "balance" ## regBalance))
+                           (V.toList vec))
 
 srcHandler :: UUID -> Ctxt -> IO (Maybe Response)
-srcHandler uuid ctxt = render ctxt "src"
+srcHandler uuid ctxt =
+  do src <- runLedgerCommand uuid Print []
+     renderWithSplices ctxt "src" (tag' "source" (\_ _ -> textSplice src))
 
 settingsHandler :: UUID -> Ctxt -> IO (Maybe Response)
 settingsHandler uuid ctxt = render ctxt "settings"
